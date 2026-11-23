@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="description" content="Temporizador de descansos para tus sesiones de gimnasio">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Descansos">
+  <title>Descansos</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-phase="days">
+<div id="app">
+
+  <!-- ============ ELEGIR DÍA ============ -->
+  <section id="screen-days" class="screen screen-days">
+    <header class="days-head">
+      <p class="eyebrow">Descansos</p>
+      <h1>¿Qué toca hoy?</h1>
+    </header>
+
+    <div id="load-error" class="load-error" hidden>
+      <strong>No se pudo cargar la rutina</strong>
+      <span id="load-error-msg"></span>
+    </div>
+
+    <ul id="day-list" class="day-list"></ul>
+
+    <footer class="days-foot">
+      <button id="btn-sound" type="button" class="ghost-btn">Probar sonido</button>
+      <button id="btn-notif" type="button" class="ghost-btn" hidden>Activar avisos</button>
+    </footer>
+  </section>
+
+  <!-- ============ SESIÓN ============ -->
+  <section id="screen-session" class="screen screen-session" hidden>
+    <header class="topbar">
+      <button id="btn-undo" type="button" class="top-btn" aria-label="Volver atrás una serie">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>
+        <span>Atrás</span>
+      </button>
+      <div class="topbar-title">
+        <span id="day-name" class="tb-day"></span>
+        <span id="ex-count" class="tb-count"></span>
+      </div>
+      <button id="btn-exit" type="button" class="top-btn top-btn--icon" aria-label="Salir de la sesión">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </header>
+
+    <p id="sound-hint" class="sound-hint" hidden>Toca la pantalla para activar el sonido</p>
+
+    <!-- Serie en curso -->
+    <div id="view-work" class="view view-work">
+      <div class="work-info">
+        <p id="w-tag" class="ex-tag" hidden></p>
+        <h2 id="w-ex-name" class="ex-name"></h2>
+        <div class="set-line">
+          <span id="w-set-word" class="set-word">Serie</span>
+          <span id="w-set" class="set-num"></span>
+        </div>
+        <div id="w-dots" class="dots" aria-hidden="true"></div>
+        <div class="targets">
+          <div class="target">
+            <span id="w-reps" class="t-val"></span>
+            <span id="w-reps-lab" class="t-lab">reps</span>
+          </div>
+          <div class="target">
+            <span id="w-peso" class="t-val"></span>
+            <span class="t-lab">peso</span>
+          </div>
+        </div>
+      </div>
+      <button id="btn-done" type="button" class="btn-done">
+        <span class="btn-done-label">Serie hecha</span>
+        <span id="w-after" class="btn-done-sub"></span>
+      </button>
+    </div>
+
+    <!-- Descanso -->
+    <div id="view-rest" class="view view-rest" hidden>
+      <p class="rest-label">Descanso <span class="paused-tag">· en pausa</span></p>
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="ring-bg" cx="100" cy="100" r="90"/>
+          <circle id="ring-fg" class="ring-fg" cx="100" cy="100" r="90"/>
+        </svg>
+        <div id="r-time" class="r-time" role="timer" aria-live="off">0:00</div>
+      </div>
+      <div class="next-card">
+        <p class="next-label">Siguiente <span id="r-new-ex" class="new-ex" hidden>Nuevo ejercicio</span></p>
+        <p id="r-next-name" class="next-name"></p>
+        <p id="r-next-meta" class="next-meta"></p>
+      </div>
+      <div class="controls">
+        <button id="btn-minus" type="button" class="ctl">−15 s</button>
+        <button id="btn-plus" type="button" class="ctl">+15 s</button>
+        <button id="btn-pause" type="button" class="ctl">Pausar</button>
+        <button id="btn-skip" type="button" class="ctl ctl--skip">Saltar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESUMEN ============ -->
+  <section id="screen-done" class="screen screen-done" hidden>
+    <div class="done-head">
+      <svg class="done-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg>
+      <h1>¡Entreno completado!</h1>
+      <p id="d-day" class="done-day"></p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span id="d-time" class="stat-val"></span><span class="stat-lab">duración</span></div>
+      <div class="stat"><span id="d-sets" class="stat-val"></span><span class="stat-lab">series</span></div>
+      <div class="stat"><span id="d-exs" class="stat-val"></span><span class="stat-lab">ejercicios</span></div>
+    </div>
+    <p id="d-range" class="done-range"></p>
+    <ul id="d-list" class="done-list"></ul>
+    <div class="done-actions">
+      <button id="btn-restart" type="button" class="btn-primary">Reiniciar día</button>
+      <button id="btn-other-day" type="button" class="btn-secondary">Elegir otro día</button>
+    </div>
+  </section>
+
+  <!-- ============ ALARMA ============ -->
+  <button id="alarm" type="button" class="alarm" hidden>
+    <span class="alarm-title">¡Se acabó el descanso!</span>
+    <span class="alarm-next">
+      <span class="alarm-now">Ahora</span>
+      <span id="a-name" class="alarm-name"></span>
+      <span id="a-meta" class="alarm-meta"></span>
+    </span>
+    <span class="alarm-stop">Parar alarma</span>
+  </button>
+
+  <!-- ============ CONFIRMAR SALIDA ============ -->
+  <dialog id="confirm-exit" class="dlg">
+    <p class="dlg-title">¿Salir de la sesión?</p>
+    <p class="dlg-text">Se perderá el progreso de hoy.</p>
+    <div class="dlg-actions">
+      <button id="dlg-stay" type="button" class="btn-secondary">Seguir entrenando</button>
+      <button id="dlg-exit" type="button" class="btn-danger">Salir</button>
+    </div>
+  </dialog>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

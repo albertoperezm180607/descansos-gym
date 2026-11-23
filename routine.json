@@ -1,0 +1,61 @@
+{
+  "dias": [
+    {
+      "nombre": "Fuerza G",
+      "ejercicios": [
+        { "nombre": "Calentamiento: cinta 5-10' + movilidad", "series": 1, "reps": "3 vueltas", "peso": "", "descanso_serie": 0, "descanso_tras_ejercicio": 90 },
+        { "nombre": "Sentadilla", "series": 3, "reps": "5", "peso": "77,5 kg", "descanso_serie": 150, "descanso_tras_ejercicio": 240 },
+        { "nombre": "Subida al banco", "series": 3, "reps": "6", "peso": "20 kg", "descanso_serie": 150, "descanso_tras_ejercicio": 240 },
+        { "nombre": "Drop jump", "series": 3, "reps": "4", "peso": "Peso corporal", "descanso_serie": 150, "descanso_tras_ejercicio": 240 },
+        {
+          "circuito": "Circuito 4-5-6",
+          "vueltas": 3,
+          "descanso_entre_ejercicios": 30,
+          "descanso_entre_vueltas": 120,
+          "ejercicios": [
+            { "nombre": "Gemelos", "reps": "10-15", "peso": "" },
+            { "nombre": "Flexiones / press banca", "reps": "10-15", "peso": "" },
+            { "nombre": "Remo horizontal", "reps": "10-15", "peso": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Fuerza G2",
+      "ejercicios": [
+        { "nombre": "Calentamiento: cinta 5-10' + movilidad", "series": 1, "reps": "3 vueltas", "peso": "", "descanso_serie": 0, "descanso_tras_ejercicio": 90 },
+        { "nombre": "Sentadilla", "series": 3, "reps": "5", "peso": "77,5 kg", "descanso_serie": 150, "descanso_tras_ejercicio": 240 },
+        { "nombre": "Subida al banco", "series": 3, "reps": "6", "peso": "20 kg", "descanso_serie": 150, "descanso_tras_ejercicio": 240 },
+        { "nombre": "Salto al cajón/banco", "series": 3, "reps": "4", "peso": "Peso corporal", "descanso_serie": 150, "descanso_tras_ejercicio": 240 },
+        {
+          "circuito": "Circuito 4-5-6",
+          "vueltas": 3,
+          "descanso_entre_ejercicios": 30,
+          "descanso_entre_vueltas": 120,
+          "ejercicios": [
+            { "nombre": "Gemelos", "reps": "10-15", "peso": "" },
+            { "nombre": "Curl bíceps + press hombros", "reps": "10", "peso": "" },
+            { "nombre": "Jalón al pecho", "reps": "10-15", "peso": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Espalda-hombro",
+      "ejercicios": [
+        {
+          "circuito": "Espalda-hombro",
+          "vueltas": 3,
+          "descanso_entre_ejercicios": 0,
+          "descanso_entre_vueltas": 60,
+          "ejercicios": [
+            { "nombre": "Retracción escapular", "reps": "20", "peso": "" },
+            { "nombre": "Rotación interna de hombro", "reps": "10 c/l", "peso": "" },
+            { "nombre": "No money", "reps": "10", "peso": "" },
+            { "nombre": "Remo unilateral", "reps": "10 c/l", "peso": "" }
+          ]
+        }
+      ]
+    }
+  ]
+}
